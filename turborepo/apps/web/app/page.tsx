@@ -11,8 +11,8 @@ export default function Web() {
   const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
-    setIsClient(true)
   }, [])
+    setIsClient(true)
 
   return (
     <>
