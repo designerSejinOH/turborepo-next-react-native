@@ -1,2 +1,1 @@
-export * from "./Div";
-export * from "./BottomTab";
+export * from './dom/BottomTab'
