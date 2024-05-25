@@ -12,7 +12,7 @@ export default function Web() {
       <div className='w-full h-full  flex flex-col gap-10 items-center justify-center min-h-screen p-10 bg-slate-200'>
         <h1 className='text-2xl'>Generate</h1>
         <div>
-          <button onClick={() => {}}>Generate</button>
+          <button>Generate</button>
         </div>
       </div>
     </>
