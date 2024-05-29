@@ -14,7 +14,7 @@ export function BottomTab(): React.JSX.Element {
 
   return (
     <>
-      <div className='fixed left-0 bottom-0 w-full flex flex-row gap-2 p-4'>
+      <div className='fixed left-0 bottom-0 w-full flex flex-row gap-2 p-4 pb-8'>
         {links.map((link) => (
           <Link
             key={link.path}

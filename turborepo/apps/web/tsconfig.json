@@ -21,6 +21,6 @@
     "resolveJsonModule": true,
     "plugins": [{ "name": "next" }]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/system", "app/system"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/screens", "app/screens"],
   "exclude": ["node_modules"]
 }

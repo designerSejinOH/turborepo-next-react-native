@@ -1,9 +1,9 @@
 {
-  "name": "Sphere Sound",
-  "short_name": "Sphere Sound",
+  "name": "Starge",
+  "short_name": "Starge",
   "icons": [
     {
-      "src": "/icons/apple-touch-icon.png",
+      "src": "/icons/android-icon-36x36.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon",
       "purpose": "any maskable"
@@ -23,7 +23,7 @@
   ],
   "start_url": "/",
   "scope": "/",
-  "display": "standalone",
+  "display": "fullscreen",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#000000"
 }

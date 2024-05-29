@@ -2,33 +2,20 @@
 
 import dynamic from 'next/dynamic'
 import { useState, useEffect } from 'react'
-import LoginScreen from './system/LoginScreen'
-import OnboardingScreen from './system/OnboardingScreen'
+import { SplashScreen, OnboardingScreen, LoginScreen } from './screens'
 
 export default function Web() {
-  const [isLogin, setIsLogin] = useState(false)
-
-  const [isClient, setIsClient] = useState(false)
-
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
+  const [isStarted, setIsStarted] = useState(false)
+  const [isOnboarded, setIsOnboarded] = useState(false)
 
   return (
     <>
-      {!isLogin ? (
-        <>
-          <OnboardingScreen
-            isStarted={isLogin}
-            onStarted={() => {
-              setIsLogin(true)
-            }}
-          />
-        </>
+      {!isStarted ? (
+        <SplashScreen onClicked={() => setIsStarted(true)} />
+      ) : !isOnboarded ? (
+        <OnboardingScreen onPrev={() => setIsStarted(false)} onNext={() => setIsOnboarded(true)} />
       ) : (
-        <>
-          <LoginScreen />
-        </>
+        <LoginScreen />
       )}
     </>
   )

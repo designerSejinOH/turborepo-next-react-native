@@ -15,7 +15,8 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #0f0f0f;
+    background-color: #000;
+    color: #fff;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
