@@ -9,6 +9,34 @@
     box-sizing: border-box;
   }
 
+  input,
+  textarea {
+    appearance: none;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+  }
+
+  input:focus,
+  textarea:focus {
+    outline: none;
+    caret-color: #000;
+  }
+
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /*화살표 배경 넣기*/
+    /* background: #fff url('이미지경로') no-repeat 98% center; */
+  }
+
+  select::-ms-expand {
+    /* 화살표 없애기 for IE10, 11*/
+    display: none;
+  }
+
+
+
   html,
   body,
   #root {

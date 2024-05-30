@@ -6,6 +6,7 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Sphere, Line, Resize, OrbitControls, Billboard, Text, Html, Box } from '@react-three/drei'
 import * as THREE from 'three'
 import { Perf } from 'r3f-perf'
+import { Header, Screen } from '@/components'
 const View = dynamic(() => import('@/components/_canvas/View').then((mod) => mod.View), {
   ssr: false,
   loading: () => (
@@ -215,67 +216,60 @@ export default function Web() {
   const [radiusSensitivity, setRadiusSensitivity] = useState(0) // 반경 감도 초기값 설정
 
   return (
-    <>
-      <div className='h-full flex flex-col '>
-        <div className='flex h-full w-full mb-32'>
-          {/* 
+    <Screen nav>
+      <Header />
+      <div className='flex h-full w-full mb-32'>
+        {/* 
           //@ts-ignore */}
-          <View className='relative size-full overflow-hidden'>
-            <Suspense fallback={null}>
-              {/* <Stars /> */}
-              <pointLight position={[10, 10, 10]} />
-              <Resize scale={3}>
-                <Network
-                  key={length}
-                  length={length}
-                  isEmotion={isEmotion}
-                  lineWidth={lineWidth ? 0.0 : 0.1}
-                  radiusSensitivity={radiusSensitivity}
-                />
-              </Resize>
-              <CameraControls />
-            </Suspense>
-            {isPerf && <Perf />}
-          </View>
-        </div>
-        <div className='fixed bottom-0 flex flex-col text-xs w-full h-fit p-8 mb-20 rounded-sm backdrop-blur-sm  text-gray-500'>
-          <div className='flex w-full flex-col gap-2'>
-            <div className='flex w-full flex-row gap-4'>
-              <label className=''>Length : {length}/500</label>
-              <input
-                type='range'
-                min={10}
-                max={500}
-                value={length}
-                onChange={(e) => setLength(Number(e.target.value))}
+        <View className='relative size-full overflow-hidden'>
+          <Suspense fallback={null}>
+            {/* <Stars /> */}
+            <pointLight position={[10, 10, 10]} />
+            <Resize scale={3}>
+              <Network
+                key={length}
+                length={length}
+                isEmotion={isEmotion}
+                lineWidth={lineWidth ? 0.0 : 0.1}
+                radiusSensitivity={radiusSensitivity}
               />
-            </div>
-            <div className='flex w-full flex-row gap-4'>
-              <label className=''>Emotion</label>
-              <input type='checkbox' checked={isEmotion} onChange={() => setIsEmotion(!isEmotion)} />
-            </div>
-            <div className='flex w-full flex-row gap-4'>
-              <label className=''>Line Width</label>
-              <input type='checkbox' checked={lineWidth} onChange={() => setLineWidth(!lineWidth)} />
-            </div>
-            <div className='flex w-full flex-row gap-4'>
-              <label className=''>Radius Sensitivity</label>
-              <input
-                type='range'
-                min={0}
-                max={1}
-                step={0.01}
-                value={radiusSensitivity}
-                onChange={(e) => setRadiusSensitivity(Number(e.target.value))}
-              />
-            </div>
-            <div className='flex w-full flex-row gap-4'>
-              <label className=''>Performance</label>
-              <input type='checkbox' checked={isPerf} onChange={() => setIsPerf(!isPerf)} />
-            </div>
+            </Resize>
+            <CameraControls />
+          </Suspense>
+          {isPerf && <Perf />}
+        </View>
+      </div>
+      <div className='fixed bottom-0 flex flex-col text-xs w-full h-fit p-8 mb-20 rounded-sm backdrop-blur-sm  text-gray-500'>
+        <div className='flex w-full flex-col gap-2'>
+          <div className='flex w-full flex-row gap-4'>
+            <label className=''>Length : {length}/500</label>
+            <input type='range' min={10} max={500} value={length} onChange={(e) => setLength(Number(e.target.value))} />
+          </div>
+          <div className='flex w-full flex-row gap-4'>
+            <label className=''>Emotion</label>
+            <input type='checkbox' checked={isEmotion} onChange={() => setIsEmotion(!isEmotion)} />
+          </div>
+          <div className='flex w-full flex-row gap-4'>
+            <label className=''>Line Width</label>
+            <input type='checkbox' checked={lineWidth} onChange={() => setLineWidth(!lineWidth)} />
+          </div>
+          <div className='flex w-full flex-row gap-4'>
+            <label className=''>Radius Sensitivity</label>
+            <input
+              type='range'
+              min={0}
+              max={1}
+              step={0.01}
+              value={radiusSensitivity}
+              onChange={(e) => setRadiusSensitivity(Number(e.target.value))}
+            />
+          </div>
+          <div className='flex w-full flex-row gap-4'>
+            <label className=''>Performance</label>
+            <input type='checkbox' checked={isPerf} onChange={() => setIsPerf(!isPerf)} />
           </div>
         </div>
       </div>
-    </>
+    </Screen>
   )
 }

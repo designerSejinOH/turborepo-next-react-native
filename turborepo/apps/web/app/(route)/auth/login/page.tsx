@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
-import { Screen } from '@/components'
+import { Logo, Screen } from '@/components'
 import Image from 'next/image'
 
 export default function LoginPage() {
@@ -20,7 +20,7 @@ export default function LoginPage() {
     <>
       <Screen>
         <div className='w-full h-2/5 flex flex-col items-center justify-center'>
-          <Image src='/img/logo.png' width={300} height={300} alt='logo' />
+          <Logo />
         </div>
         <div className='w-full h-3/5 flex flex-col items-center justify-start'>
           <div className='flex flex-col items-center justify-center w-full max-w-md p-10'>

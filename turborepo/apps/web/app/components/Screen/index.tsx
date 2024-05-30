@@ -22,11 +22,10 @@ export function Screen(props: ScreenProps) {
         </div>
       ) : (
         <div
-          className='flex flex-col items-center justify-center w-full min-h-screen gap-4'
+          className='flex flex-col items-center justify-center w-full min-h-screen gap-4 pb-24'
           style={{
             backgroundColor: backgroundColor,
             padding: padding,
-            paddingBottom: '5rem',
           }}
         >
           {children}

@@ -1,2 +1,2 @@
-export { PromptInput } from './PromptInput'
+export { OpenAIImageAnalysis } from './OpenAIImageAnalysis'
 export { GetEmbeddings } from './GetEmbeddings'
