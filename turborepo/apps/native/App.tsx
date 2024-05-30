@@ -1,19 +1,25 @@
 import { StyleSheet, Text, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { Button } from "@repo/ui";
+import Constants from "expo-constants";
+import { WebView } from "react-native-webview";
 
 export default function Native() {
+  const runFirst = `
+  window.isNativeApp = true;
+  true; // note: this is required, or you'll sometimes get silent failures
+`;
+
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Native</Text>
-      <Button
-        onClick={() => {
-          console.log("Pressed!");
-          alert("Pressed!");
+      <StatusBar style="light" />
+      <WebView
+        style={styles.webview}
+        source={{
+          uri: "http://starge.vercel.app",
         }}
-        text="Boop"
+        onMessage={(event) => {}}
+        injectedJavaScript={runFirst}
       />
-      <StatusBar style="auto" />
     </View>
   );
 }
@@ -21,13 +27,10 @@ export default function Native() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: "#000",
   },
-  header: {
-    fontWeight: "bold",
-    marginBottom: 20,
-    fontSize: 36,
+  webview: {
+    flex: 1,
+    marginTop: Constants.statusBarHeight,
   },
 });
