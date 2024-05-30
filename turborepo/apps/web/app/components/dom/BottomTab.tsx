@@ -8,8 +8,8 @@ export function BottomTab(): React.JSX.Element {
   const pathname = usePathname()
   const links = [
     { path: '/explore', label: 'EXPLORE' },
-    { path: '/create', label: '+' },
-    { path: '/my', label: 'MY' },
+    { path: '/generate', label: '+' },
+    { path: '/mylist', label: 'MY' },
   ]
 
   return (

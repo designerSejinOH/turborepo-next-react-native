@@ -6,10 +6,6 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Sphere, Line, Resize, OrbitControls, Billboard, Text, Html, Box } from '@react-three/drei'
 import * as THREE from 'three'
 import { Perf } from 'r3f-perf'
-import Scene from '@/components/canvas/Scene'
-
-const Stars = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Stars), { ssr: false })
-const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
   loading: () => (

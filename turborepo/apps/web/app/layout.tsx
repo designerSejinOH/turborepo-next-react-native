@@ -1,9 +1,9 @@
-import { BottomTab } from '../src/components'
+import { BottomTab } from './components'
 import styles from '../styles/index.module.css'
 import '../styles/global.css'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
-import { Layout } from '../src/components'
+import { Layout } from '@/components'
 import { Metadata, Viewport } from 'next'
 
 const APP_NAME = 'Starge'
