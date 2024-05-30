@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { Screen } from '@/components'
 import Image from 'next/image'
 
-export function LoginScreen() {
+export default function LoginPage() {
   const router = useRouter()
 
   const getLoginSuccess = () => {

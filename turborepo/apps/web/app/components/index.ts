@@ -1,3 +1,3 @@
-export * from './dom/BottomTab'
-export * from './dom/Layout'
-export * from './dom/Screen'
+export * from './BottomTab'
+export * from './Layout'
+export * from './Screen'

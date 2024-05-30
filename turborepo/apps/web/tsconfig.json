@@ -3,7 +3,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["app/*"]
+      "@/*": ["app/*", "./*"],
+      "icons": ["public/icons"],
+      "img": ["public/img"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],

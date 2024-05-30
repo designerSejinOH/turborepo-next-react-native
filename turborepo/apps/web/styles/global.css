@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://use.typekit.net/vat2bgj.css");
+
 
 @layer base {
   * {

@@ -2,18 +2,15 @@
 
 import dynamic from 'next/dynamic'
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { Screen } from '@/components'
 import { TypeAnimation } from 'react-type-animation'
 import { GoArrowLeft, GoArrowRight } from 'react-icons/go'
 
-interface OnboardingScreenProps {
-  onPrev: () => void
-  onNext: () => void
-}
+export default function OnboardingPage() {
+  const router = useRouter()
 
-export function OnboardingScreen(props: OnboardingScreenProps) {
-  const { onPrev, onNext } = props
   return (
     <>
       <Screen>
@@ -35,7 +32,7 @@ export function OnboardingScreen(props: OnboardingScreenProps) {
           <button
             className='border rounded-full pl-4 pr-6 border-white py-2 text-lg bg-black text-white active:bg-white active:text-black flex flex-row gap-2 items-center justify-center'
             onClick={() => {
-              onPrev()
+              router.push('/')
             }}
           >
             <GoArrowLeft /> Prev
@@ -43,7 +40,7 @@ export function OnboardingScreen(props: OnboardingScreenProps) {
           <button
             className='border rounded-full pl-6 pr-4 border-white py-2 text-lg bg-white text-black active:bg-black active:text-white flex flex-row gap-2 items-center justify-center'
             onClick={() => {
-              onNext()
+              router.push('/auth/login')
             }}
           >
             Next <GoArrowRight />

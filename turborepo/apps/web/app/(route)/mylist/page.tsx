@@ -6,7 +6,7 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Sphere, Line, Resize, OrbitControls, Billboard, Text, Html, Box } from '@react-three/drei'
 import * as THREE from 'three'
 import { Perf } from 'r3f-perf'
-const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
+const View = dynamic(() => import('@/components/_canvas/View').then((mod) => mod.View), {
   ssr: false,
   loading: () => (
     <div className='flex h-96 w-full flex-col items-center justify-center'>

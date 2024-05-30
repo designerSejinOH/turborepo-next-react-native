@@ -1,50 +1,28 @@
-import { BottomTab } from './components'
-import styles from '../styles/index.module.css'
 import '../styles/global.css'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Layout } from '@/components'
+import { pretendard } from '@/theme/fonts'
 import { Metadata, Viewport } from 'next'
-
-const APP_NAME = 'Starge'
-const APP_DEFAULT_TITLE = 'Starge'
-const APP_TITLE_TEMPLATE = `%s - ${APP_NAME}`
-const APP_DESCRIPTION = 'Starge is a web application that allows users to create and share music in a 3D environment.'
+import { APP_INFO } from '@/constants'
 
 export const metadata: Metadata = {
   title: {
-    default: APP_DEFAULT_TITLE,
-    template: APP_TITLE_TEMPLATE,
+    default: APP_INFO.title,
+    template: APP_INFO.titleTemplate,
   },
-  description: APP_DESCRIPTION,
-  keywords: [
-    'TPO',
-    'F',
-    'Time',
-    'Place',
-    'Occasion',
-    'Favor',
-    'Feedback',
-    'Sejin Oh',
-    'Hyungdong Hwhang',
-    'new media',
-    'ux design',
-  ],
-  authors: [
-    {
-      name: 'Sejin Oh',
-      url: 'https://sejinoh.site',
-    },
-  ],
+  description: APP_INFO.description,
+  keywords: APP_INFO.keywords,
+  authors: APP_INFO.authors,
   creator: 'Sejin Oh',
   publisher: 'Sejin Oh',
   manifest: '/manifest.json',
   generator: 'SEJIN OH',
-  applicationName: APP_NAME,
+  applicationName: APP_INFO.name,
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: APP_DEFAULT_TITLE,
+    title: APP_INFO.title,
     // startUpImage: [],
   },
   category: 'webapp',
@@ -55,12 +33,12 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    siteName: APP_NAME,
+    siteName: APP_INFO.name,
     title: {
-      default: APP_DEFAULT_TITLE,
-      template: APP_TITLE_TEMPLATE,
+      default: APP_INFO.title,
+      template: APP_INFO.titleTemplate,
     },
-    description: APP_DESCRIPTION,
+    description: APP_INFO.description,
   },
   referrer: 'origin-when-cross-origin',
   robots: {
@@ -108,7 +86,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en'>
-      <body>
+      <body className={`${pretendard}`}>
         <Layout>{children}</Layout>
         <Analytics />
         <SpeedInsights />
