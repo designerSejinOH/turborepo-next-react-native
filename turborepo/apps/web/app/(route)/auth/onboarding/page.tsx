@@ -1,12 +1,12 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { useState, useEffect, use } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { Screen } from '@/components'
 import { TypeAnimation } from 'react-type-animation'
-import { GoArrowLeft, GoArrowRight, GoSmiley } from 'react-icons/go'
+import { GoArrowLeft, GoArrowRight } from 'react-icons/go'
 import { GridLoader, PacmanLoader, PuffLoader } from 'react-spinners'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
@@ -40,6 +40,7 @@ const Section = (props: SectionProps) => {
 export default function OnboardingPage() {
   const router = useRouter()
   const [step, setStep] = useState(0)
+  const swiperRef = useRef(null)
 
   const favors = [
     '댄스',
@@ -77,7 +78,6 @@ export default function OnboardingPage() {
       image: '/img/logo.png',
     },
   ]
-  const [demo, setDemo] = useState(0)
 
   return (
     <>
@@ -103,35 +103,48 @@ export default function OnboardingPage() {
           </Section>
         ) : step === 2 ? (
           <Section heading='분석한 당신의 취향은...' step={step}>
-            <PacmanLoader color='#fff' size={60} margin={10} />
+            <GridLoader color='#fff' size={50} margin={10} />
+
             <Swiper
-              className='w-full h-fit flex flex-row items-center justify-center mt-20'
+              ref={swiperRef}
+              onSwiper={(swiper) => (swiperRef.current = swiper)}
+              className='w-full h-fit flex flex-row items-center justify-center mt-8'
               spaceBetween={50}
               slidesPerView={1}
-              navigation
-              pagination={{ clickable: true }}
-              scrollbar={{ draggable: true }}
             >
               {demolists.map((demo, index) => (
-                <SwiperSlide
-                  key={index}
-                  className='w-full h-fit flex flex-row gap-4 justify-center items-center rounded-lg bg-gray p-4 '
-                >
-                  <div className='w-20 h-20 bg-black flex flex-row items-center justify-center'>
-                    <Image src='/img/logo.png' width={60} height={60} alt='logo' />
-                  </div>
-                  <div className='w-full h-full flex flex-col gap-2 items-start justify-center'>
-                    <div className='w-fit h-full flex flex-col items-center justify-start'>
-                      <span className='text-white text-xl'>{demolists[index].title}</span>
-                      <p className='text-white text-sm'>{demolists[index].artist}</p>
+                <SwiperSlide key={index} className='w-full h-fit justify-center items-center rounded-lg bg-gray p-4'>
+                  <div className='flex flex-row w-full justify-center items-center gap-2 h-full'>
+                    <div className='bg-black w-24 h-16 flex justify-center items-center'>
+                      <Image src='/img/logo.png' width={60} height={60} alt='logo' />
                     </div>
-                    <div className='w-full h-2 border border-black'>
-                      <div className='w-1/2 h-full bg-black'></div>
+                    <div className='w-full h-full flex flex-col gap-2 items-center justify-center'>
+                      <div className='w-full h-full flex flex-col items-center text-left justify-center'>
+                        <h1 className='w-full text-white text-xl'>{demo.title}</h1>
+                        <p className='w-full text-white text-sm'>{demo.artist}</p>
+                      </div>
+                      <div className='w-full h-2 border border-white'>
+                        <div className='w-1/2 h-full bg-white'></div>
+                      </div>
                     </div>
                   </div>
                 </SwiperSlide>
               ))}
             </Swiper>
+            <div className='flex flex-row w-full justify-center items-center gap-4 h-fit mt-4'>
+              <button
+                onClick={() => swiperRef.current.slidePrev()}
+                className='w-fit h-fit p-4 text-2xl active:opacity-50 border border-white rounded-full'
+              >
+                <GoArrowLeft />
+              </button>
+              <button
+                onClick={() => swiperRef.current.slideNext()}
+                className='w-fit h-fit p-4 text-2xl active:opacity-50 border border-white rounded-full'
+              >
+                <GoArrowRight />
+              </button>
+            </div>
           </Section>
         ) : null}
         <div className='w-full h-fit flex flex-row items-center justify-between px-4 pb-16'>
@@ -142,7 +155,7 @@ export default function OnboardingPage() {
               else router.push('/')
             }}
           >
-            <GoArrowLeft /> Prev
+            <GoArrowLeft /> {step === 0 ? 'Back' : 'Prev'}
           </button>
           <button
             className='border rounded-full pl-6 pr-4 border-white py-2 text-lg bg-white text-black active:bg-black active:text-white flex flex-row gap-2 items-center justify-center'
@@ -151,7 +164,8 @@ export default function OnboardingPage() {
               else router.push('/explore')
             }}
           >
-            Next <GoArrowRight />
+            {step === 2 ? 'Start' : 'Next'}
+            <GoArrowRight />
           </button>
         </div>
       </Screen>

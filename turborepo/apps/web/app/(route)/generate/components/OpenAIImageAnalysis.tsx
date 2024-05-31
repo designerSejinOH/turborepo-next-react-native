@@ -59,13 +59,13 @@ export const OpenAIImageAnalysis = () => {
   return (
     <div className='w-full h-fit flex flex-col gap-4 justify-center items-center'>
       <input
-        className='w-full h-fit text-sm border px-2 py-2'
+        className='w-full h-fit text-sm border px-2 py-2 rounded-xl'
         type='file'
         accept='image/*'
         onChange={handleImageUpload}
       />
       <div className='flex flex-col gap-2 w-full h-fit'>
-        <div className='w-full h-fit min-h-24 border'>
+        <div className='w-full h-fit min-h-24 border rounded-xl overflow-hidden'>
           <h2 className='w-full h-fit px-2 border-b bg-white text-black'>Response</h2>
           {response && <pre className='p-2 w-full text-wrap'>{response}</pre>}
         </div>

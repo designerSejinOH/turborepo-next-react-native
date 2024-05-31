@@ -9,8 +9,8 @@ export function Header() {
 
   return (
     <div className='w-full h-fit relative'>
-      <Profile />
-      <div className='flex flex-row px-2 gap-2 fixed w-full justify-end right-0 top-0 z-20 '>
+      {/* <Profile /> */}
+      <div className='flex flex-row p-4 gap-2 fixed w-full justify-end right-0 top-0 z-20 '>
         <SearchButton />
         <ActionButton
           onClick={() => {
@@ -40,12 +40,12 @@ export function SearchButton() {
   return (
     <>
       <div
-        className={`h-fit p-2 text-sm bg-gray  text-white rounded-full flex flex-row items-center justify-center active:bg-opacity-100 active:text-black ${activeInput ? 'w-full bg-opacity-100' : 'w-fit bg-opacity-50'}`}
+        className={`h-fit p-2 text-xl bg-gray  text-white rounded-full flex flex-row items-center justify-center active:bg-opacity-100 active:text-black ${activeInput ? 'w-full bg-opacity-100' : 'w-fit bg-opacity-50'}`}
       >
         {activeInput && (
           <>
             <input
-              className='w-full h-fit py-0 leading-1 px-2 bg-transparent text-black text-sm placeholder:text-black'
+              className='w-full h-fit py-0 px-2 bg-transparent text-black text-xl placeholder:text-black'
               type='text'
               placeholder='Search'
             />
@@ -53,13 +53,14 @@ export function SearchButton() {
         )}
         {activeInput ? (
           <GoX
-            className='text-black text-lg'
+            className='text-black text-xl'
             onClick={() => {
               setActiveInput(false)
             }}
           />
         ) : (
           <GoSearch
+            className=' text-xl'
             onClick={() => {
               setActiveInput(true)
             }}
@@ -78,7 +79,7 @@ export function ActionButton(props: ActionButtonProps) {
   return (
     <>
       <button
-        className='w-fit h-fit p-2 text-sm bg-gray bg-opacity-50 text-white rounded-full flex flex-row items-center justify-center active:bg-white active:text-black'
+        className='w-fit h-fit p-2 text-xl bg-gray bg-opacity-50 text-white rounded-full flex flex-row items-center justify-center active:bg-white active:text-black'
         onClick={() => {
           onClick()
         }}

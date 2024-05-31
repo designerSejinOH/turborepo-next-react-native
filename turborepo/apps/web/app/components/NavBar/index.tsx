@@ -13,7 +13,7 @@ const navItems = [
 const NavLink = ({ href, label, icon, active }) => (
   <Link
     href={href}
-    className={`${active ? 'text-white bg-black ' : 'text-gray'} h-full w-full flex flex-row justify-center items-center text-2xl rounded-xl`}
+    className={`${active ? 'text-white bg-black ' : 'text-gray'} h-full w-full flex flex-row justify-center items-center text-xl rounded-full`}
   >
     {icon ? <GoPlus /> : <span>{label}</span>}
   </Link>
@@ -24,7 +24,7 @@ export function NavBar() {
 
   return (
     <div className='fixed left-0 bottom-4 w-full h-fit p-4'>
-      <div className='flex flex-row gap-2 bg-white rounded-xl w-full h-20 p-2 '>
+      <div className='flex flex-row gap-2 bg-white bg-opacity-10 rounded-full w-full h-16 p-2 '>
         {navItems.map(({ href, label, icon }) => (
           <NavLink key={href} href={href} label={label} icon={icon} active={pathname === href} />
         ))}
