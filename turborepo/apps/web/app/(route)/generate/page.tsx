@@ -32,7 +32,7 @@ export default function Web() {
           className='w-full flex flex-row justify-start items-center text-white text-4xl'
         />
       </div>
-      <div className='w-full h-full flex flex-col items-center justify-center gap-10 p-4'>
+      <div className='w-full h-full flex flex-col items-center justify-start gap-10 p-4 overflow-y-scroll'>
         <OpenAIImageAnalysis />
       </div>
     </Screen>
