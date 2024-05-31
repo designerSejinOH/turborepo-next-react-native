@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Screen } from '@/components'
+import { BarLoader } from 'react-spinners'
 
 export default function Web() {
   const router = useRouter()
@@ -18,5 +19,9 @@ export default function Web() {
     }
   }, [router])
 
-  return <Screen>Loading...</Screen> // 스플래쉬 스크린
+  return (
+    <Screen>
+      <BarLoader color='#fff' />
+    </Screen>
+  ) // 스플래쉬 스크린
 }

@@ -4,6 +4,7 @@
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { Screen } from '@/components'
+import { BarLoader } from 'react-spinners'
 
 export default function AuthPage() {
   const router = useRouter()
@@ -19,5 +20,9 @@ export default function AuthPage() {
     }
   }, [router])
 
-  return <Screen>Redirecting...</Screen>
+  return (
+    <Screen>
+      <BarLoader color='#fff' />
+    </Screen>
+  )
 }
