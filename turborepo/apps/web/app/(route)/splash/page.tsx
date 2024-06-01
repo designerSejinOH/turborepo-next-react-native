@@ -36,14 +36,24 @@ export default function SplashPage() {
         </div>
         <div className='w-full h-1/5 flex flex-col items-center justify-center py-10'>
           {isTypedDone && (
-            <button
-              className='animate-pulse text-sm  active:text-primary flex flex-row  items-center justify-center'
-              onClick={() => {
-                router.replace('/auth')
-              }}
-            >
-              ✦ 눌러서 시작하기 ✦
-            </button>
+            <>
+              <button
+                className='animate-pulse text-sm  active:text-primary flex flex-row  items-center justify-center'
+                onClick={() => {
+                  router.replace('/auth')
+                }}
+              >
+                Starge 처음 시작하기
+              </button>
+              <button
+                className='animate-pulse text-sm  active:text-primary flex flex-row  items-center justify-center'
+                onClick={() => {
+                  router.replace('/explore')
+                }}
+              >
+                바로 시작하기
+              </button>
+            </>
           )}
         </div>
         <div className='w-full h-1/5 flex flex-col items-center justify-end py-10'>

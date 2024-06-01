@@ -192,7 +192,7 @@ function Network({
   )
 }
 
-function CameraControls() {
+export function CameraControls() {
   const {
     camera,
     gl: { domElement },
@@ -271,5 +271,21 @@ export default function Web() {
         </div>
       </div>
     </Screen>
+  )
+}
+
+export const Canvas3D = () => {
+  return (
+    <Canvas>
+      <Suspense fallback={null}>
+        <ambientLight intensity={0.5} />
+        <pointLight position={[10, 10, 10]} />
+        <Billboard scale={2} position={[0, 0, 0]}>
+          <Text fontSize={0.5} color='white' anchorX='center' anchorY='middle'>
+            Hello, 3D World!
+          </Text>
+        </Billboard>
+      </Suspense>
+    </Canvas>
   )
 }

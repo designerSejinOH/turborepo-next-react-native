@@ -11,7 +11,7 @@ export function Header() {
     <div className='w-full h-fit relative'>
       {/* <Profile /> */}
       <div className='flex flex-row p-4 gap-2 fixed w-full justify-end right-0 top-0 z-20 '>
-        <SearchButton />
+        {/* <SearchButton /> */}
         <ActionButton
           onClick={() => {
             router.push('/mylist/settings')

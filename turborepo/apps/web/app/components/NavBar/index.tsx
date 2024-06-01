@@ -23,7 +23,7 @@ export function NavBar() {
   const pathname = usePathname()
 
   return (
-    <div className='fixed left-0 bottom-4 w-full h-fit p-4'>
+    <div className='fixed z-10 left-0 bottom-8 w-full h-fit p-4'>
       <div className='flex flex-row gap-2 bg-white bg-opacity-10 rounded-full w-full h-16 p-2 '>
         {navItems.map(({ href, label, icon }) => (
           <NavLink key={href} href={href} label={label} icon={icon} active={pathname === href} />

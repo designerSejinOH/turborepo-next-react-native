@@ -1,7 +1,6 @@
 'use client'
 import { useRef } from 'react'
 import dynamic from 'next/dynamic'
-import { NavBar } from '@/components'
 
 const Scene = dynamic(() => import('@/components/_canvas/Scene'), {
   ssr: false,
@@ -33,7 +32,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         eventSource={ref}
         eventPrefix='client'
       />
-      <NavBar />
     </div>
   )
 }

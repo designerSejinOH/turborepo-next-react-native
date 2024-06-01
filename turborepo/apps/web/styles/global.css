@@ -9,6 +9,11 @@
     box-sizing: border-box;
   }
 
+  div {
+    white-space: pre-wrap;
+
+  }
+
   input,
   textarea {
     appearance: none;
