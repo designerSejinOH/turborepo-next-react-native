@@ -214,7 +214,6 @@ export const OpenAIImageAnalysis = () => {
           </button>
         </div>
         <p className='w-full h-fit text-sm text-gray'>Analyze the image by ChatGPT.</p>
-
         <div className='flex flex-row gap-2 w-full h-fit'>
           <button
             className='w-full h-fit flex flex-row gap-4 justify-start items-center px-4 py-2 rounded-xl text-lg text-left border border-primary bg-primary active:bg-white active:text-primary'
@@ -257,6 +256,7 @@ export const OpenAIImageAnalysis = () => {
           Copy Music URL
         </button>
       </div>
+      <div className='w-full h-72'></div>
     </div>
   )
 }
