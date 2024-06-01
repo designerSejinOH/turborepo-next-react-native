@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
 import OpenAI from 'openai'
-import { GoNorthStar, GoPulse } from 'react-icons/go'
+import { GoCopy, GoNorthStar, GoPulse } from 'react-icons/go'
 import { PulseLoader } from 'react-spinners'
 
 const API_KEY = process.env.NEXT_PUBLIC_OPEN_API_KEY
+
+import axios from 'axios'
+
+// replace your vercel domain
+const baseUrl = 'https://sunoapi-hbo.vercel.app'
 
 const openai = new OpenAI({
   apiKey: API_KEY,
@@ -17,6 +22,10 @@ export const OpenAIImageAnalysis = () => {
   const [keywords, setKeywords] = useState<string[] | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const [embedding, setEmbedding] = useState<number[] | null>(null)
+
+  const [audidLoading, setAudioLoading] = useState<boolean>(false)
+
+  const [audioUrl, setAudioUrl] = useState<string | null>(null)
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -99,6 +108,56 @@ export const OpenAIImageAnalysis = () => {
     }
   }
 
+  const handleCopyClipBoard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text)
+
+      alert('Copy Success!')
+    } catch (error) {
+      alert('Failed to copy to clipboard.')
+    }
+  }
+
+  async function generateAudioByPrompt(payload) {
+    const url = `${baseUrl}/api/generate`
+    const response = await axios.post(url, payload, {
+      headers: { 'Content-Type': 'application/json' },
+    })
+    return response.data
+  }
+
+  async function getAudioInformation(audioIds) {
+    const url = `${baseUrl}/api/get?ids=${audioIds}`
+    const response = await axios.get(url)
+    return response.data
+  }
+
+  async function GenerateAudio() {
+    setAudioLoading(true)
+
+    const data = await generateAudioByPrompt({
+      prompt: musicPrompt,
+      make_instrumental: false,
+      wait_audio: false,
+    })
+
+    const ids = `${data[0].id},${data[1].id}`
+    console.log(`ids: ${ids}`)
+
+    for (let i = 0; i < 60; i++) {
+      const data = await getAudioInformation(ids)
+      if (data[0].status === 'streaming') {
+        console.log(`${data[0].id} ==> ${data[0].audio_url}`)
+        console.log(`${data[1].id} ==> ${data[1].audio_url}`)
+        setAudioUrl(data[0].audio_url)
+        setAudioLoading(false)
+        break
+      }
+      // sleep 5s
+      await new Promise((resolve) => setTimeout(resolve, 5000))
+    }
+  }
+
   return (
     <div className='w-full h-fit flex flex-col gap-4 justify-center items-center'>
       <input
@@ -108,7 +167,7 @@ export const OpenAIImageAnalysis = () => {
         onChange={handleImageUpload}
       />
       <div className='flex flex-col gap-2 w-full h-fit'>
-        <div className='w-full h-fit border rounded-xl overflow-hidden'>
+        <div className='w-full h-fit border rounded-xl min-h-16 overflow-hidden relative'>
           <h2 className='w-full h-fit px-2 border-b bg-white text-black'>Keywords</h2>
           {loading ? (
             <div className='w-full h-fit py-4 flex justify-center items-center'>
@@ -117,18 +176,14 @@ export const OpenAIImageAnalysis = () => {
           ) : (
             keywords && <pre className='p-2 w-full text-wrap text-gray'>{keywords.join(', ')}</pre>
           )}
+          <button
+            className='w-fit h-fit absolute bottom-0 z-20 right-0 p-2  bg-opacity-50 text-white rounded-full flex flex-row items-center justify-center active:bg-opacity-100 active:text-black'
+            onClick={() => handleCopyClipBoard(keywords ? keywords.join(', ') : '')}
+          >
+            <GoCopy />
+          </button>
         </div>
-        <div className='w-full h-fit border rounded-xl overflow-hidden'>
-          <h2 className='w-full h-fit px-2 border-b bg-white text-black'>Music Prompt</h2>
-          {loading ? (
-            <div className='w-full h-fit py-4 flex justify-center items-center'>
-              <PulseLoader size={5} color='#AAA' />
-            </div>
-          ) : (
-            musicPrompt && <pre className='p-2 w-full text-wrap text-gray'>{musicPrompt}</pre>
-          )}
-        </div>
-        <div className='w-full h-fit border rounded-xl overflow-hidden text-wrap'>
+        <div className='w-full h-fit border rounded-xl min-h-16 py overflow-hidden text-wrap'>
           <h2 className='w-full h-fit px-2 border-b bg-white text-black'>Embedding</h2>
           {loading ? (
             <div className='w-full h-fit py-4 flex justify-center items-center'>
@@ -142,24 +197,66 @@ export const OpenAIImageAnalysis = () => {
             )
           )}
         </div>
+        <div className='w-full h-fit border rounded-xl min-h-16 overflow-hidden relative'>
+          <h2 className='w-full h-fit px-2 border-b bg-white text-black'>Music Prompt</h2>
+          {loading ? (
+            <div className='w-full h-fit py-4 flex justify-center items-center'>
+              <PulseLoader size={5} color='#AAA' />
+            </div>
+          ) : (
+            musicPrompt && <pre className='p-2 w-full text-wrap text-gray'>{musicPrompt}</pre>
+          )}
+          <button
+            className='w-fit h-fit absolute bottom-0 z-20 right-0 p-2  bg-opacity-50 text-white rounded-full flex flex-row items-center justify-center active:bg-opacity-100 active:text-black'
+            onClick={() => handleCopyClipBoard(musicPrompt || '')}
+          >
+            <GoCopy />
+          </button>
+        </div>
+        <p className='w-full h-fit text-sm text-gray'>Analyze the image by ChatGPT.</p>
+
         <div className='flex flex-row gap-2 w-full h-fit'>
           <button
-            className='w-full h-fit px-4 py-2 rounded-lg text-left border border-primary bg-primary active:bg-white active:text-primary'
+            className='w-full h-fit flex flex-row gap-4 justify-start items-center px-4 py-2 rounded-xl text-lg text-left border border-primary bg-primary active:bg-white active:text-primary'
             onClick={handleSubmit}
           >
             <GoPulse />
             Analyze Image
           </button>
-          <button
-            className='w-full h-fit px-4 py-2 rounded-lg text-left  text-black border border-white bg-white active:bg-black active:text-white'
-            onClick={handleSubmit}
-          >
-            <GoNorthStar />
-            Generate Music
-          </button>
         </div>
       </div>
-      <p className='w-full h-fit text-sm text-gray'>* Image Analysis with OpenAI</p>
+      <div className='w-full h-fit flex flex-col gap-2 justify-center items-center'>
+        <p className='w-full h-fit text-sm text-gray'>Generate music by Suno.</p>
+        <button
+          className='w-full h-fit flex flex-row gap-4 justify-start items-center px-4 py-2 rounded-xl text-lg text-left border border-white bg-white text-black active:bg-black active:text-white'
+          onClick={GenerateAudio}
+          style={{ opacity: musicPrompt ? 1 : 0.5 }}
+        >
+          <GoNorthStar />
+          Generate Music
+        </button>
+        {audidLoading && (
+          <div className='w-full h-fit py-4 flex justify-center items-center'>
+            <PulseLoader size={5} color='#AAA' />
+          </div>
+        )}
+
+        {audioUrl && (
+          <audio controls>
+            <source src={audioUrl} type='audio/mpeg' />
+          </audio>
+        )}
+        <button
+          onClick={() => {
+            handleCopyClipBoard(audioUrl)
+          }}
+          className='w-full h-fit flex flex-row gap-4 justify-start items-center px-4 py-2 rounded-xl text-lg text-left border border-white bg-white text-black active:bg-black active:text-white'
+          style={{ display: audioUrl ? 'block' : 'none' }}
+        >
+          <GoCopy />
+          Copy Music URL
+        </button>
+      </div>
     </div>
   )
 }
