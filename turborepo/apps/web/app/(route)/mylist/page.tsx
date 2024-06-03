@@ -239,53 +239,7 @@ export default function Web() {
           {isPerf && <Perf />}
         </View>
       </div>
-      <div className='fixed bottom-0 flex flex-col text-xs w-full h-fit p-8 mb-20 rounded-sm backdrop-blur-sm  text-gray-500'>
-        <div className='flex w-full flex-col gap-2'>
-          <div className='flex w-full flex-row gap-4'>
-            <label className=''>Length : {length}/500</label>
-            <input type='range' min={10} max={500} value={length} onChange={(e) => setLength(Number(e.target.value))} />
-          </div>
-          <div className='flex w-full flex-row gap-4'>
-            <label className=''>Emotion</label>
-            <input type='checkbox' checked={isEmotion} onChange={() => setIsEmotion(!isEmotion)} />
-          </div>
-          <div className='flex w-full flex-row gap-4'>
-            <label className=''>Line Width</label>
-            <input type='checkbox' checked={lineWidth} onChange={() => setLineWidth(!lineWidth)} />
-          </div>
-          <div className='flex w-full flex-row gap-4'>
-            <label className=''>Radius Sensitivity</label>
-            <input
-              type='range'
-              min={0}
-              max={1}
-              step={0.01}
-              value={radiusSensitivity}
-              onChange={(e) => setRadiusSensitivity(Number(e.target.value))}
-            />
-          </div>
-          <div className='flex w-full flex-row gap-4'>
-            <label className=''>Performance</label>
-            <input type='checkbox' checked={isPerf} onChange={() => setIsPerf(!isPerf)} />
-          </div>
-        </div>
-      </div>
+      <div className='fixed bottom-0 flex flex-col text-xs w-full h-fit p-8 mb-20 rounded-sm backdrop-blur-sm  text-gray-500'></div>
     </Screen>
-  )
-}
-
-export const Canvas3D = () => {
-  return (
-    <Canvas>
-      <Suspense fallback={null}>
-        <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} />
-        <Billboard scale={2} position={[0, 0, 0]}>
-          <Text fontSize={0.5} color='white' anchorX='center' anchorY='middle'>
-            Hello, 3D World!
-          </Text>
-        </Billboard>
-      </Suspense>
-    </Canvas>
   )
 }

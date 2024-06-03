@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import OpenAI from 'openai'
+import Image from 'next/image'
 import { GoCopy, GoNorthStar, GoPulse } from 'react-icons/go'
 import { PulseLoader } from 'react-spinners'
 
 const API_KEY = process.env.NEXT_PUBLIC_OPEN_API_KEY
 
 import axios from 'axios'
+import { IoCameraOutline } from 'react-icons/io5'
 
 // replace your vercel domain
 const baseUrl = 'https://sunoapi-hbo.vercel.app'
@@ -94,7 +96,7 @@ export const OpenAIImageAnalysis = () => {
         // Generate embedding for keywords
         if (keywordsMatch) {
           const embeddingResponse = await openai.embeddings.create({
-            model: 'text-embedding-ada-002',
+            model: 'text-embedding-3-small',
             input: keywordsMatch[1].split(',').map((kw) => kw.trim()),
           })
           setEmbedding(embeddingResponse.data[0].embedding)
@@ -160,12 +162,20 @@ export const OpenAIImageAnalysis = () => {
 
   return (
     <div className='w-full h-fit flex flex-col gap-4 justify-center items-center'>
-      <input
-        className='w-full h-fit text-sm border px-2 py-2 rounded-xl'
-        type='file'
-        accept='image/*'
-        onChange={handleImageUpload}
-      />
+      <div className='w-full h-fit border rounded-xl overflow-hidden'>
+        {image ? (
+          <Image src={URL.createObjectURL(image)} width={300} height={300} alt='Uploaded Image' />
+        ) : (
+          <div className='w-full h-48 bg-gray-100 flex justify-center items-center flex-col gap-4'>
+            <p className='text-gray'>No image uploaded</p>
+            <label className='w-fit h-fit text-sm text-white bg-primary rounded-xl p-2 cursor-pointer flex flex-row gap-2 justify-center items-center'>
+              <IoCameraOutline />
+              Upload Image
+              <input type='file' accept='image/*' className='hidden' onChange={handleImageUpload} />
+            </label>
+          </div>
+        )}
+      </div>
       <div className='flex flex-col gap-2 w-full h-fit'>
         <div className='w-full h-fit border rounded-xl min-h-16 overflow-hidden relative'>
           <h2 className='w-full h-fit px-2 border-b bg-white text-black'>Keywords</h2>

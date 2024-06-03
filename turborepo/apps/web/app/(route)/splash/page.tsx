@@ -22,7 +22,7 @@ export default function SplashPage() {
           <div className='w-full h-1/3 flex flex-col items-center justify-start'>
             <TypeAnimation
               sequence={[
-                'Stage Your Moments',
+                'Stage Your Moments!',
                 () => {
                   setIsTypedDone(true)
                 },
@@ -37,27 +37,28 @@ export default function SplashPage() {
         <div className='w-full h-1/5 flex flex-col items-center justify-center py-10'>
           {isTypedDone && (
             <>
-              <button
+              {/* <button
                 className='animate-pulse text-sm  active:text-primary flex flex-row  items-center justify-center'
                 onClick={() => {
                   router.replace('/auth')
                 }}
               >
                 Starge 처음 시작하기
-              </button>
+              </button> */}
               <button
                 className='animate-pulse text-sm  active:text-primary flex flex-row  items-center justify-center'
                 onClick={() => {
                   router.replace('/explore')
                 }}
               >
-                바로 시작하기
+                Starge 시작하기
+                <GoArrowRight className='ml-2' />
               </button>
             </>
           )}
         </div>
         <div className='w-full h-1/5 flex flex-col items-center justify-end py-10'>
-          <p className='text-xs text-gray'>Copyright © 2024 Starge | All Rights Reserved</p>
+          <p className='text-xs text-gray'>Copyright © 2024 STARGE | All Rights Reserved</p>
         </div>
       </Screen>
     </>
