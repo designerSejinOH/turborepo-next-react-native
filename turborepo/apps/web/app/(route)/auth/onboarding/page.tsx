@@ -107,21 +107,10 @@ export default function OnboardingPage() {
                   <meshStandardMaterial color='blue' />
                 </Box>
               </Resize>
-              <CameraControls />
             </Suspense>
           </Canvas>
         </Section>
       ) : null}
     </Screen>
-  )
-}
-
-export function CameraControls() {
-  const {
-    camera,
-    gl: { domElement },
-  } = useThree()
-  return (
-    <OrbitControls args={[camera, domElement]} autoRotate autoRotateSpeed={0.5} enableDamping dampingFactor={0.1} />
   )
 }

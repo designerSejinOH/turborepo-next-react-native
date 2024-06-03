@@ -192,7 +192,7 @@ function Network({
   )
 }
 
-export function CameraControls() {
+function CameraControls() {
   const {
     camera,
     gl: { domElement },
