@@ -20,7 +20,7 @@ export default function LoginPage() {
     <>
       <Screen>
         <div className='w-full h-2/5 flex flex-col items-center justify-center'>
-          <Logo />
+          <Logo isStatic />
         </div>
         <div className='w-full h-3/5 flex flex-col items-center justify-start'>
           <div className='flex flex-col items-center justify-center w-full max-w-md p-10'>

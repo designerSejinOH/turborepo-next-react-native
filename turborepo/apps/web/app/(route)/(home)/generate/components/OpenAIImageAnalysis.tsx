@@ -162,7 +162,7 @@ export const OpenAIImageAnalysis = () => {
 
   return (
     <div className='w-full h-fit flex flex-col gap-4 justify-center items-center'>
-      <div className='w-full h-fit border rounded-xl overflow-hidden'>
+      <div className='w-full h-fit border rounded-xl overflow-hidden flex justify-center items-center'>
         {image ? (
           <Image src={URL.createObjectURL(image)} width={300} height={300} alt='Uploaded Image' />
         ) : (

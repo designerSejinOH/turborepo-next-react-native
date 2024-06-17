@@ -1,9 +1,8 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Screen } from '@/components'
-import { BarLoader } from 'react-spinners'
+import { Screen, Splash } from '@/components'
 
 export default function Web() {
   const router = useRouter()
@@ -14,14 +13,14 @@ export default function Web() {
 
     if (isLoggedIn) {
       router.replace('/explore')
-    } else {
-      router.replace('/splash')
     }
   }, [router])
 
   return (
-    <Screen>
-      <BarLoader color='#fff' />
-    </Screen>
-  ) // 스플래쉬 스크린
+    <>
+      <Screen>
+        <Splash />
+      </Screen>
+    </>
+  )
 }
