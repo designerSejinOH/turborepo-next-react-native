@@ -1,7 +1,10 @@
 'use client'
+
 import { useState } from 'react'
 import { TypeAnimation } from 'react-type-animation'
 import { motion, AnimatePresence } from 'framer-motion'
+import { GoChevronLeft } from 'react-icons/go'
+import { useRouter } from 'next/navigation'
 
 export interface SectionProps {
   heading?: string
@@ -19,8 +22,9 @@ export const Section = (props: SectionProps) => {
 
   return (
     <>
+      <Pagenation step={step} />
       <TopContainer step={step} heading={heading} subHeading={subHeading} />
-      <div className='w-full h-full overflow-y-scroll flex flex-col items-center justify-between py-2'>{children}</div>
+      <div className='w-full h-full px-4 overflow-y-scroll flex flex-col items-center justify-between'>{children}</div>
       {bottom && (
         <BottomContainer
           bottomHeading={bottomHeading}
@@ -32,13 +36,32 @@ export const Section = (props: SectionProps) => {
   )
 }
 
+export const Pagenation = (props: SectionProps) => {
+  const { heading, subHeading, step, children, bottom = true, bottomHeading, bottomActive, onBottomButtonClick } = props
+  const router = useRouter()
+
+  return (
+    <>
+      <button
+        className='w-full h-fit text-lg flex flex-row items-center justify-start px-2 py-6'
+        onClick={() => {
+          router.back()
+        }}
+      >
+        <GoChevronLeft className='text-2xl' />
+        <p className='text-lg'>Step {step} of 3</p>
+      </button>
+    </>
+  )
+}
+
 export const TopContainer = (props: SectionProps) => {
   const { step, heading, subHeading } = props
   const [headingDone, setHeadingDone] = useState(false)
 
   return (
     <>
-      <div className='w-full h-28 flex flex-col items-center justify-start p-4'>
+      <div className='w-full h-fit px-4 py-6 flex flex-col gap-4 items-center justify-start'>
         {heading && (
           <>
             <TypeAnimation
@@ -52,7 +75,7 @@ export const TopContainer = (props: SectionProps) => {
               wrapper='div'
               cursor={false}
               speed={50}
-              className='w-full h-fit flex flex-row justify-start items-center text-white text-2xl'
+              className='w-full h-fit flex flex-row justify-start items-center text-white text-4xl'
             />
             <AnimatePresence>
               {headingDone && (
@@ -60,7 +83,7 @@ export const TopContainer = (props: SectionProps) => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 1 }}
-                  className='w-full h-fit flex flex-row justify-start items-center text-gray text-sm'
+                  className='w-full h-fit flex flex-row justify-start items-center text-gray text-lg'
                 >
                   {subHeading}
                 </motion.p>

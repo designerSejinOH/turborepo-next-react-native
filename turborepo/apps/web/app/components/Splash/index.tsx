@@ -3,8 +3,6 @@
 import { Logo } from '@/components'
 import { TypeAnimation } from 'react-type-animation'
 import { GoSquareFill, GoSquare } from 'react-icons/go'
-
-import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 export function Splash() {
@@ -21,7 +19,7 @@ export function Splash() {
           <button
             className='relative w-1/2 h-fit px-4 py-2 text-xl text-center flex flex-row  items-center justify-center active:opacity-50'
             onClick={() => {
-              router.push('/onboarding')
+              router.push('/signup')
             }}
           >
             <GoSquareFill className='mr-2' />
@@ -31,7 +29,7 @@ export function Splash() {
           <button
             className=' w-1/2 h-fit px-4 py-2 text-xl text-center flex flex-row  items-center justify-center active:opacity-50'
             onClick={() => {
-              router.push('/login')
+              router.push('/signin')
             }}
           >
             <GoSquare className='mr-2' />
